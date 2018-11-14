@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Generador Email FINDEP</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/scriptABC.js"></script>
+</head>
+
+<body>
+    <div class="modal fade" id="modalAC" tabindex="-1" role="dialog" aria-labelledby="modalAC" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="labelModalAC">Agregar usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col">
+                        <div id="cargadorModal">
+                            <i class="fas fa-sync-alt rotar"></i>
+                            <h4>Cargando</h4>
+                        </div>
+                        <form action="javascript:;" onsubmit="altaEmail(this)" id="formAltaEmail">
+                            <div class="row form-group" id="alertValidacion">
+                                Debe llenar todos los datos primero
+                            </div>
+                            <div class="row form-group">
+                                <label for="nombre">Nombre(s)</label>
+                                <input placeholder="Juan" type="text" name="nombre" id="nombre" class="form-control">
+                            </div>
+                            <div class="row form-group">
+                                <label for="apellidoPat">Apellido Paterno</label>
+                                <input placeholder="López" type="text" name="apellidoPat" id="apellidoPat" class="form-control">
+                            </div>
+                            <div class="row form-group">
+                                <label for="apellidoMat">Apellido Materno</label>
+                                <input placeholder="Pérez" type="text" name="apellidoMat" id="apellidoMat" class="form-control">
+                            </div>
+                            <div class="row form-group">
+                                <label for="correo">Correo</label>
+                                <input placeholder="juan@email.com" type="email" name="correo" id="correo" class="form-control">
+                            </div>
+
+                            <h6>Correos a Recibir</h6>
+                            <div class=" row form-group">
+                                <label for="sel1">Tipo:</label>
+                                <select class="form-control" onchange="habilitarCombos(this)" name="selectTipo" id="selectTipo">
+                                    <option value="0" selected disables hidden>Seleccione...</option>
+                                    <option value="1">Nacional</option>
+                                    <option value="2">Divisional</option>
+                                    <option value="3">Sucursal</option>
+                                </select>
+                            </div>
+
+                            <div class="row form-group">
+                                <label for="sel1">Division:</label>
+                                <select onchange="llenarSelectSucursal()" disabled class="form-control" name="selectDivision"
+                                    id="selectDivision">
+                                    <option disabled selected hidden value="0">Seleccione un tipo...</option>
+                                </select>
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </div>
+                            <div class="row form-group">
+                                <label for="sel1">Sucursal:</label>
+                                <select disabled class="form-control" name="selectSucursal" id="selectSucursal">
+                                    <option disabled selected hidden value="0">Seleccione un tipo...</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer" id="modalFooter">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="botonAplicarModal">Aplicar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminar" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="labelModalAC">Dar de baja usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col">
+                        Está seguro que quiere dar de baja a <br>
+                        <b id="emailAEliminar"></b>?
+                    </div>
+                </div>
+                <div class="modal-footer" id="modalFooter">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="botonEliminar">Sí</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row" id="navegacion">
+            <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <span class="navbar-brand mb-0 h1">Generador Email FINDEP</span>
+
+                    <div class="collapse navbar-collapse" id="navFINDEP">
+                        <ul class="navbar-nav mr-auto">
+                            <!--<li class="nav-item">
+                            <a class="nav-link" onclick="navBar(0)">Resumen<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="navBar(1)">Altas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="navBar(2)">Bajas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="navBar(3)">Cambios</a>
+                        </li>-->
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                    <button class="btn btn-primary float-right" onclick="modalAgregarRegistro()"><i class="fas fa-plus"></i> Agregar Registro</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <table class="table" id="tablaRegistros">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Nivel</th>
+                            <th scope="col">Division</th>
+                            <th scope="col">Sucursal</th>
+                            <th scope="col">Fecha Alta</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCuerpoRegistros">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

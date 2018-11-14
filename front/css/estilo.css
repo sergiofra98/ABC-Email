@@ -1,0 +1,58 @@
+body{
+    background-color: #6d6d6d;
+}
+
+#navegacion{
+    width: 100%;
+}
+
+table{
+    font-size: 14px;
+}
+#tablaRegistros{
+    background-color: white;
+}
+
+#alertValidacion{
+    background-color: #ff2f2f;
+    border-radius: 8px;
+    color: white;
+    padding: 12px;
+    display: none;
+}
+
+#tablaRegistros .fas{
+    margin: 0;
+    padding: 0 10px;
+    font-size: 22px;
+    text-align: center;
+}
+
+#cargadorModal{
+    padding: 12px 120px;
+    text-align: center;
+}
+
+#cargadorModal .fas{
+    font-size: 30px;
+    margin: 0 12px;
+    float: left;
+    
+}
+
+.rotar{
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.row{
+    margin: 12px 0;
+}
+
+.fa-user-minus{
+    color: #ff2f2f;
+}
