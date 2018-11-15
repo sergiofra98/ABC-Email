@@ -13,6 +13,22 @@ table{
     background-color: white;
 }
 
+#tablaRegistros tbody td:first-of-type{
+    font-weight: bold;
+}
+
+.formInvalido{
+    border-color: #ff2f2f;
+}
+
+#tablaRegistros .fa-caret-down{
+    transition: .2s;
+}
+
+#tablaRegistros .fa-caret-down.rotarSort{
+    transform: rotate(180deg);
+}
+
 #alertValidacion{
     background-color: #ff2f2f;
     border-radius: 8px;
@@ -38,6 +54,12 @@ table{
     margin: 0 12px;
     float: left;
     
+}
+
+
+
+input::placeholder{
+    color: #d6d6d6;
 }
 
 .rotar{

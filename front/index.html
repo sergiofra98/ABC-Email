@@ -40,7 +40,7 @@
                         </div>
                         <form action="javascript:;" onsubmit="altaEmail(this)" id="formAltaEmail">
                             <div class="row form-group" id="alertValidacion">
-                                Debe llenar todos los datos primero
+                                Corrija sus entradas
                             </div>
                             <div class="row form-group">
                                 <label for="nombre">Nombre(s)</label>
@@ -63,7 +63,7 @@
                             <div class=" row form-group">
                                 <label for="sel1">Tipo:</label>
                                 <select class="form-control" onchange="habilitarCombos(this)" name="selectTipo" id="selectTipo">
-                                    <option value="0" selected disables hidden>Seleccione...</option>
+                                    <option value="" selected disabled hidden>Seleccione...</option>
                                     <option value="1">Nacional</option>
                                     <option value="2">Divisional</option>
                                     <option value="3">Sucursal</option>
@@ -156,17 +156,24 @@
                 <table class="table" id="tablaRegistros">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Nombre Completo</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Nivel</th>
-                            <th scope="col">Division</th>
-                            <th scope="col">Sucursal</th>
-                            <th scope="col">Fecha Alta</th>
+                            <th scope="col" onclick="sortTable(0, 'text');">Nombre Completo&nbsp;<i class="fas fa-caret-down"></i></th>
+                            <th scope="col" onclick="sortTable(1, 'text')">Email&nbsp;<i class="fas fa-caret-down"></i></th>
+                            <th scope="col" onclick="sortTable(2, 'text')">Nivel&nbsp;<i class="fas fa-caret-down"></i></th>
+                            <th scope="col" onclick="sortTable(3, 'text')">Division&nbsp;<i class="fas fa-caret-down"></i></th>
+                            <th scope="col" onclick="sortTable(4, 'text')">Sucursal&nbsp;<i class="fas fa-caret-down"></i></th>
+                            <th scope="col" onclick="sortTable(5, 'text')">Fecha Alta&nbsp;<i class="fas fa-caret-down"></i></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
+                    <tbody id="noResultados" style="text-align:center">
+                        <tr >
+                            <td colspan="7">
+                                No hay elementos para mostrar
+                            </td>
+                        </tr>
+                    </tbody>
                     <tbody id="tablaCuerpoRegistros">
-
+                        
                     </tbody>
                 </table>
             </div>
