@@ -94,6 +94,10 @@ function habilitarCombos(elem) {
         $('#selectDivision').html('<option value="" selected disabled hidden>No disponible</option>')
         $('#selectSucursal').html('<option value="" selected disabled hidden>No disponible</option>')
 
+        
+        $('#selectDivision').val('')
+        $('#selectSucursal').val('')
+
     }
 }
 
@@ -177,6 +181,7 @@ function modalEliminarRegistro(id) {
 }
 
 function modalAgregarRegistro() {
+    habilitarCombos(1)
     $('#modalFooter').show()
 
     $('#botonAplicarModal').html('Agregar')
@@ -201,6 +206,7 @@ function modalAgregarRegistro() {
 }
 
 function modalEditarRegistro(id) {
+    habilitarCombos(1)
     $('#modalFooter').show()
     arreglarCargador()
     $('#cargadorModal h4').html('Cargando')
@@ -361,10 +367,10 @@ function agregarRegistro() {
                 }
                 else if ($(this).attr('id') === 'selectSucursal') {
                     if (tipoReporte === '3') {
-                        if ($(this)[0].value != null){
+                        if ($(this)[0].value != null) {
                             $(this).addClass("formInvalido")
                         }
-                        else{
+                        else {
                             $('#selectDivision').addClass("formInvalido")
                         }
                     }
@@ -495,7 +501,7 @@ function getRegistros() {
                         break;
                     }
                     case 3: {
-                        append += '<td scope="row">Sucursal</td>'
+                        append += '<td scope="row">Supervisor</td>'
                         break;
                     }
                 }
